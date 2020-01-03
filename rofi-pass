@@ -86,6 +86,7 @@ autopass () {
 
 	rm -f "$HOME/.cache/rofi-pass/last_used"
 	printf '%s\n' "${root}: $selected_password" > "$HOME/.cache/rofi-pass/last_used"
+  setxkbmap de neo
 	for word in ${stuff["$AUTOTYPE_field"]}; do
 		case "$word" in
 			":tab") xdotool key Tab;;
@@ -147,6 +148,7 @@ typeUser () {
 	x_repeat_enabled=$(xset q | awk '/auto repeat:/ {print $3}')
 	xset r off
 
+  setxkbmap de neo
 	printf '%s' "${stuff[${USERNAME_field}]}" | xdotool type --delay ${xdotool_delay} --clearmodifiers --file -
 
 	xset r "$x_repeat_enabled"
@@ -161,6 +163,7 @@ typePass () {
 	x_repeat_enabled=$(xset q | awk '/auto repeat:/ {print $3}')
 	xset r off
 
+  setxkbmap de neo
 	printf '%s' "${password}" | xdotool type --delay ${xdotool_delay} --clearmodifiers --file -
 
 	if [[ $notify == "true" ]]; then
@@ -194,6 +197,7 @@ typeField () {
 		*) to_type="${stuff[${typefield}]}" ;;
 	esac
 
+  setxkbmap de neo
 	printf '%s' "$to_type" | xdotool type --delay ${xdotool_delay} --clearmodifiers --file -
 
 	xset r "$x_repeat_enabled"
